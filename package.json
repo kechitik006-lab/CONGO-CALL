@@ -8,24 +8,4 @@
   "dependencies": {
     "@netlify/functions": "^2.4.0"
   }
-}{
-  "name": "airtel-congo",
-  "version": "1.0.0",
-  "description": "AIRTEL Congo 2,000,000 Franc Giveaway",
-  "scripts": {
-    "build": "echo 'No build step needed'"
-  },
-  "dependencies": {
-    "@netlify/functions": "^2.4.0"
-  }
-}{
-  "name": "airtel-congo",
-  "version": "1.0.0",
-  "description": "AIRTEL Congo 2,000,000 Franc Giveaway",
-  "scripts": {
-    "build": "echo 'No build step needed'"
-  },
-  "dependencies": {
-    "@netlify/functions": "^2.4.0"
-  }
 }
